@@ -1,0 +1,95 @@
+---
+title: "Experiment-3 Descriptive Statistical Analysis"
+author: "ss"
+date: "22/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aim
+
+To administer baseline statistical analysis on a dataset and report descriptive analysis summary.
+
+
+## Algorithm
+
+* Step-1: Load the data and required R-packages for data analysis
+
+* Step-2: Apply basic statistic functions 
+
+* Step-3: Create appropriate visualizations
+
+* Step-4: Report the findings based on descriptive analysis
+
+## R-code
+
+>Loading data
+
+```{r}
+df<-read.csv("https://raw.githubusercontent.com/sijuswamy/StatLab/main/Dataset_1.csv",header = TRUE)
+df$Gender=as.factor(df$Gender)
+
+head(df)
+```
+
+```{r}
+str(df)
+```
+> Finding Column sums
+
+```{r,warning=FALSE}
+library(dplyr)
+df1=select(df,-Student_Name,-Gender)
+Sub_total=colSums(df1)
+Sub_average=colMeans(df1)
+```
+```{r}
+round(Sub_average,2)
+```
+```{r}
+library(ggplot2)
+crop=ggplot(data=df, mapping=aes(x=Gender, y=X20IMCAT201))+geom_boxplot()+labs(x ="Gender", y = "Maths")
+crop
+```
+
+```{r}
+ggplot(data = df, aes(x = X20IMCAT201,fill = df$Gender)) + geom_histogram(binwidth = 15, fill = "seagreen",color = "red")+ 
+  theme(legend.position = "top")#+facet_grid(~Gender)
+
+```
+```{r}
+plot(density(df$X20IMCAT201))
+```
+
+
+```{r}
+median(df$X20IMCAT201)
+```
+
+
+
+```{r}
+library(DescTools)
+Mode(df$X20IMCAT201)
+```
+>User defined funtion
+
+
+```{r}
+calcmode <- function(a) {  
+vector <- unique(a)  
+vector[which.max(tabulate(match(a, vector)))]  
+}  
+```
+```{r}
+calcmode(df$X20IMCAT201)
+```
+```{r}
+sd(df$X20IMCAT201)
+```
+
+
+## Results and discussions
