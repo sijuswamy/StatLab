@@ -1,5 +1,5 @@
 # StatLab
-Website for Computational Statistics
+Repository for Computational Statistics Lab
 
 # Link to the `bookdown` version of the Lab manual: <https://bookdown.org/siju_swamy/Stat_Lab/>
 
