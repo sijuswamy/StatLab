@@ -24,7 +24,7 @@ Bayes posterior probability can be directly calculated using mathematical method
 
 * Step 3: Calculate the same prior probability using `LaplaceDemon` package
 
-* Step 5: Report the results
+* Step 4: Report the results
 
 >*Case:* Classical Problem from Hoel, Port, and Stone (1971). Suppose there are three tables with two drawers each. The first table has a gold coin in each of the drawers, the second table has a gold coin in one drawer and a silver coin in the other drawer, while the third table has silver coins in both of the drawers. A table is selected at random and a drawer is opened which shows a gold coin. 
 

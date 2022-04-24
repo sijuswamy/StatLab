@@ -1,0 +1,63 @@
+---
+title: "Result Analysis of INMCA"
+output: flexdashboard::flex_dashboard
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+#library(googleVis)
+```
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+df=read.csv("Data_1.csv",header = TRUE)
+```
+
+Column {.sidebar}
+-----------------------------------------------------------------------
+
+First series result analysis of INMCA 2020-25 batch
+
+```{r}
+selectInput("subject", label = "Subject:",
+            choices = colnames(df), selected = "X20IMCAT201")
+selectInput("n_breaks", label = "Number of bins:",
+            choices = c(10, 20, 35, 50), selected = 20)
+
+sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+            min = 0.2, max = 2, value = 1, step = 0.2)
+sliderInput("rs_adjust", label = "Sampling Limit:",
+            min = 5, max = nrow(df), value = 10, step = 1)
+```
+
+Column
+-----------------------------------------------------------------------
+
+### Performance level relative to Expected Outcome Threshold
+
+```{r}
+renderGauge({
+    invalidateLater(1000, session)
+    dane <- round(mean(sample(df[,input$subject],input$rs_adjust))/30*100,2)
+    df <- data.frame(Label = "IRR", Value = as.numeric(dane))
+    gauge(dane, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+  })
+
+```
+
+
+### Distribution of Marks in the course: `r renderText(input$subject)`
+
+```{r}
+renderPlot({
+  hist(df[,input$subject], probability = TRUE, breaks = as.numeric(input$n_breaks),main='',
+       xlab = "Marks")
+  
+  dens <- density(df[,input$subject], adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```

@@ -1,0 +1,77 @@
+---
+title: 'Experiment 8: Normal Distribution'
+author: "siju.swamy@saintgits.org"
+date: "4/23/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using Normal distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dnorm(x=x,mean=m,sd=s)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `pnorm()` function. Syntax is: 
+
+>`pnorm(x,mean=m,sd=s)`
+
+The quantile for probability $p$ can be evaluated using the `qnorm()` function. Syntax is:
+
+>`qnorm(prob,mean=m,sd=s)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Generate and draw the cdf and pdf of a normal distribution with mean=10 and standard deviation=3. Use values of $x$ from 0 to 20 in intervals of 1.
+
+## R code
+
+```{r}
+# create input parameters
+t=seq(0,20,1); mu=10;sd=3
+
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dnorm(t,mean = mu,sd=sd)
+pmval
+```
+
+### Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=pnorm(t,mean = mu,sd=sd)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(t,pmval,xlab="t",ylab="P(X=t)", main="The Normal Distribution")
+plot(t,cdval,xlab="t",ylab=expression(P(X<=t)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Normal distribution for given input parameters are evaluated and create respective plots.
