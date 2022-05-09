@@ -1,0 +1,155 @@
+---
+title: 20INMCAL204- Laboratory Report
+author:
+  - name: Naveen Prince
+    email: naveen.prince@saintgits.org
+    affiliation: Student, INMCA 20-25
+    correspondingauthor: true
+    footnote: 1
+  - name: Siju K.S
+    email: siju.swamy@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+  - name: Jobin Jose
+    email: jobin.jose@saintgits.org
+    affiliation: Saintgits College of Engineering (Autonomous)
+    footnote: 2
+address:
+  - code: Student, INMCA 20-25
+    address: Department of Computer Applications, RB402
+  - code: Saintgits College of Engineering (Autonomous)
+    address: Department of Mathematics, AB304
+footnote:
+  - code: 1
+    text: "Student, 20INMCAL204."
+  - code: 2
+    text: "Course Faculty, 20INMCAL204."
+abstract: |
+ Experiments listed in the Lab Manual are successfully executed in the R version 4.1.0. Details of the experiments with input \& ouput are summerized in the form of a report. Experiments are arranged in the form of sections. This report is prepared using the R-package `rticles` [@mrticles].
+journal: "Mathematics Department for Evaluation"
+date: "`r Sys.Date()`"
+classoption: preprint, 3p, authoryear
+bibliography: mybibfile.bib
+linenumbers: true
+numbersections: true
+# Use a CSL with `citation_package = "default"`
+# csl: https://www.zotero.org/styles/elsevier-harvard
+output: 
+  rticles::elsevier_article:
+    keep_tex: true
+    citation_package: natbib
+---
+\tableofcontents
+\newpage
+# Experiment 4: Statistical Summary and measure of normality of a dataset
+
+## Aim
+
+1. To create the statistical summary of a data
+
+2. To study normality of the data
+
+## Packages used and syntax of R methods
+
+For statistical summary of a given dataset, the `rbase` package will be used. To calculate skewness and kurtosis of dataset, the `ACSWR` is used.
+
+>*Note:* The functions `skewness` and `kurtosis` from the `e1071` package are more generic functions. Another resouse is `moments` package. 
+
+## Algorithm
+* Step 1: Load the dataset
+
+* Step 2: Load necessary packages
+
+* Step 3: Calculate statistical summaries
+
+* Step 4: Calculate the `skewness` and `kurtosis` of the numerical data
+
+* Step 5: Report the results
+
+## R code
+
+```{r}
+#loading package
+library(ACSWR)
+#loading data
+data(yb)
+#view structure of data
+str(yb)
+
+```
+```{r}
+# creating statistical summary
+
+summary(yb)
+```
+```{r}
+range(yb$Preparation_1); range(yb$Preparation_2) # list out ranges of data
+
+```
+
+```{r}
+#skewness and kurtosis of preparation_1
+skewcoeff(yb$Preparation_1); kurtcoeff(yb$Preparation_1)
+```
+```{r}
+#skewness and kurtosis of preparation_2
+skewcoeff(yb$Preparation_2); kurtcoeff(yb$Preparation_2)
+```
+
+## Results & discussions
+
+A distribution is normal then `mean=median=mode` and the skewness is 0 and kurtosis is 2. In this experiment statistical summaries of two variables are created. From the skewness and kurtosis measures, both the variables are positively skewed and `preparation_1` is lepto-kurtic and `preparation_2` is meso-kurtic. Based on the statistical summary and skewness and kurtosis measures, both the variables are different from a normal distribution.
+
+# Experiment 5- Implementation of Bayes Theorem
+
+## Aim
+
+1. To calculate Bayes posterior probability using Bayes theorem
+
+## Packages used and syntax of R methods
+
+Bayes posterior probability can be directly calculated using mathematical method or using the package `LaplacesDemon`.
+
+## Algorithm
+* Step 1: Load the package, prior probabilities and conditionals
+
+* Step 2: Calculate the Bayes posterior probability using the formula-$P(B_j|A)=\dfrac{P(A|B_j)P(B_j)}{\sum\limits_{j=1}^mP(A|B_j)P(B_j)}$
+
+* Step 3: Calculate the same prior probability using `LaplaceDemon` package
+
+* Step 4: Report the results
+
+>*Case:* Classical Problem from Hoel, Port, and Stone (1971). Suppose there are three tables with two drawers each. The first table has a gold coin in each of the drawers, the second table has a gold coin in one drawer and a silver coin in the other drawer, while the third table has silver coins in both of the drawers. A table is selected at random and a drawer is opened which shows a gold coin. 
+
+>*Observation:*The problem is to compute the probability of the other drawer also showing a gold coin. The Bayes formula can be easily implemented in an R program.
+
+## R code
+
+```{r}
+#loading data
+prob_GC <- c(1,1/2,0)
+priorprob_GC <- c(1/3,1/3,1/3)
+```
+
+```{r}
+#calculating postrior probability
+post_GC <- prob_GC*priorprob_GC
+post_GC/sum(post_GC)
+```
+
+```{r}
+# do the same using LaplacesDemon` package
+library(LaplacesDemon)
+BayesTheorem(prob_GC, priorprob_GC)
+
+```
+
+
+## Results & discussions
+
+The Bayes theorem is used to calculate posterior probability of the Mathematical model of the given case. Also the result is verified using the `LaplacesDemon` package.
+
+
+\hrule
+
+# References {.unnumbered}
