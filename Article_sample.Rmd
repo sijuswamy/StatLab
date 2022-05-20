@@ -1,8 +1,8 @@
 ---
-title: 20INMCAL204- Laboratory Report
+title: 20INMCAL204- Lab Manual
 author:
-  - name: Naveen Prince
-    email: naveen.prince@saintgits.org
+  - name: Student
+    email: student@saintgits.org
     affiliation: Student, INMCA 20-25
     correspondingauthor: true
     footnote: 1
@@ -25,7 +25,7 @@ footnote:
   - code: 2
     text: "Course Faculty, 20INMCAL204."
 abstract: |
- Experiments listed in the Lab Manual are successfully executed in the R version 4.1.0. Details of the experiments with input \& ouput are summerized in the form of a report. Experiments are arranged in the form of sections. This report is prepared using the R-package `rticles` [@mrticles].
+ Experiments listed in the Lab Manual are successfully executed in the R version 4.1.0. Details of the experiments with input \& output are summerized in the form of a report. Experiments are arranged in the form of sections. This report is prepared using the R-package `rticles` [@mrticles].
 journal: "Mathematics Department for Evaluation"
 date: "`r Sys.Date()`"
 classoption: preprint, 3p, authoryear
@@ -150,6 +150,791 @@ BayesTheorem(prob_GC, priorprob_GC)
 The Bayes theorem is used to calculate posterior probability of the Mathematical model of the given case. Also the result is verified using the `LaplacesDemon` package.
 
 
+# Experiment 6: Binomial Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using binomial distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default) are used. 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dbinom(x=x,size=n,p=p)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `pbinom()` function. Syntax is: 
+
+>`pbinom(x,size=n,p=p)`
+
+The quantile for probability $p$ can be evaluated using the `quantile()` function. Syntax is:
+
+>`qbinom(prob,size,p=p)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Find the mass function of a binomial distribution with  $n=20,p=0.4$. Also draw the graphs of the mass function and cumulative distribution function.
+
+## R code
+
+```{r}
+# create input parameters
+n=20
+p=0.4
+x=0:20
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dbinom(x,size=n,prob=p)
+pmval
+```
+
+## Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=pbinom(x,size=n,prob=p)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(x,pmval,xlab="x",ylab="P(X=x)", main="The Binomial Distribution")
+plot(x,cdval,xlab="x",ylab=expression(P(X<=x)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Binomial distribution for given input parameters are evaluated and create respective plots.
+
+# Experiment 7: Poisson Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using Poisson distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default) are used. 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dpois(x=x,lambda=l)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `ppois()` function. Syntax is: 
+
+>`pbinom(x,lambda=l)`
+
+The quantile for probability $p$ can be evaluated using the `qpois()` function. Syntax is:
+
+>`qpois(prob,lambda=l)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Given the data $n=50$, mean, $\lambda=25$, use appropriate function to find the mass function of a Poisson distribution. Also draw the graphs of the mass function and cumulative distribution function.
+
+## R code
+
+```{r}
+# create input parameters
+n <-50; l <- 25
+x=0:50
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dpois(x,lambda=l)
+pmval
+```
+
+### Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=ppois(x,lambda = l)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(x,pmval,xlab="x",ylab="P(X=x)", main="The Poisson Distribution")
+plot(x,cdval,xlab="x",ylab=expression(P(X<=x)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Poisson distribution for given input parameters are evaluated and create respective plots.
+
+# Experiment 8: Normal Distribution
+
+## Aim
+
+1. To calculate probability mass density, probability distribution and quantiles using Normal distribution
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default) is used. 
+
+The probability mass at a point $x$ can be evaluated using the syntax:
+
+>`dnorm(x=x,mean=m,sd=s)`.
+
+The probability distribution $P(X\leq x)$ is calculated using the `pnorm()` function. Syntax is: 
+
+>`pnorm(x,mean=m,sd=s)`
+
+The quantile for probability $p$ can be evaluated using the `qnorm()` function. Syntax is:
+
+>`qnorm(prob,mean=m,sd=s)`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required distribution
+
+* Step 2: Calculate the required probabilities
+
+* Step 3: Report the results
+
+
+>*Case:* Generate and draw the cdf and pdf of a normal distribution with mean=10 and standard deviation=3. Use values of $x$ from 0 to 20 in intervals of 1.
+
+## R code
+
+```{r}
+# create input parameters
+t=seq(0,20,1); mu=10;sd=3
+
+```
+### Prbability distribution
+
+```{r}
+#calculating probability mass distribution and cumulative distribution
+pmval=dnorm(t,mean = mu,sd=sd)
+pmval
+```
+
+### Cumulative probability distribution
+
+```{r}
+#calculating cumulative density
+cdval=pnorm(t,mean = mu,sd=sd)
+cdval
+```
+### Plotting the `pmf` and `cdf`
+
+```{r}
+par(mfrow=c(1,2))
+plot(t,pmval,xlab="t",ylab="P(X=t)", main="The Normal Distribution")
+plot(t,cdval,xlab="t",ylab=expression(P(X<=t)),main="Cumulative Distribution Function")
+
+```
+
+
+## Results & discussions
+
+The `pmf` and `cf` of the Normal distribution for given input parameters are evaluated and create respective plots.
+
+# Experiment 9: Fitting of Distribution
+
+## Aim
+
+1. To fit a binomial distribution to the given data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default) is used. 
+
+Any observed distribution can be fitted to a theoretical distribution using the formula $N\times p(X=x)$  , where $N$ is the pdf of the target distribution.
+
+## Algorithm
+
+* Step 1: Assign the inputs for required fitting model
+
+* Step 2: Calculate the theoretical frequencies
+
+* Step 3: Visualize the observed distribution and theoretical distribution
+
+* Step 4: Compare the difference in orginal and fitted distributions
+
+
+>*Case:* The following data shows the result of throwing 12 fair dice 4,096 times; a throw of 4,5, or 6 being called success.
+
+$\begin{array}{|l|ccccccccccccc|}\hline \text{Success(X)}:& 0 &1& 2& 3& 4 &5& 6& 7& 8& 9& 10& 11& 12\\\hline \text{Frequency(f)}:& 0 &7& 60& 198& 430& 731& 948& 847& 536& 257& 71& 11& 0\\\hline \end{array}$
+
+Fit a binomial distribution and find the expected frequencies. Compare the graphs of the observed frequency and theoretical frequency.
+
+
+## R code
+
+```{r}
+# create input parameters
+p=3/6
+Observed=c(0 ,7, 60,198,430,731,948,847,536, 257, 71,11, 0)
+success=seq(0,12,1)
+N=sum(Observed)
+```
+### Theoretical distribution
+
+```{r}
+#calculating theoretical frequencies
+TF=round(N*dbinom(success,size=12,prob=p),2)
+TF
+```
+### Plotting the observed and theoretical frequencies
+```{r}
+par(mfrow=c(1,2))
+plot(success,Observed,xlab="success",ylab="f(x)")
+title("Observed Distribution")
+plot(success,TF,xlab="success",ylab="TF")
+title("Fitted Binomial Distribution")
+
+```
+
+### Fitting table
+
+```{r}
+Fit=data.frame(Success=success,Observed,Fitted_binom=TF)
+knitr::kable(
+  Fit, caption = 'The binomial fitting table',
+  booktabs = TRUE)
+```
+
+
+## Results & discussions
+
+Given arbitrary distribution is mapped into the framework of a binomial distribution. 
+
+# Experiment 10: Correlation analysis- Karl-Pearson Coefficient of Correlation
+
+## Aim
+
+1. To find the correlation coefficient of the given bivariate data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default). 
+
+**Pearson correlation (r)**, which measures a linear dependence between two variables (x and y). It’s also known as a parametric correlation test because it depends to the distribution of the data. It can be used only when x and y are from normal distribution. The plot of $y = f(x)$ is named the linear regression curve. The Pearson correlation formula is:
+$$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+where $m_x$ and $m_y$ are means of the distributions x and y respectively.
+
+Correlation coefficient can be computed using the functions `cor()` or `cor.test()`:
+
+**Syntax:**
+
+> `cor(x, y, method = c("pearson", "kendall", "spearman"))`
+ `cor.test(x, y, method=c("pearson", "kendall", "spearman"))`
+>Note: If the data contain missing values, use the following R code to handle missing values by case-wise deletion.
+`cor(x, y,  method = "pearson", use = "complete.obs")`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required correlation model
+
+* Step 2: Calculate the correlation coefficient
+
+* Step 3: Verify the result using direct calculation
+
+* Step 4: Interpret the result
+
+
+>*Case:*  From the following data, compute Karl Pearson's coefficient of correlation.
+
+$\begin{array}{|l|ccccccc|}\hline
+\text{Price(Rupees)}:& 10& 20& 30& 40& 50& 60& 70\\\hline
+\text{Supply(Units)}:& 8& 6& 14& 16& 10& 20& 24\\\hline
+\end{array}$
+
+
+## R code
+
+```{r}
+# loading data
+price=c(10,20,30,40,50,60,70)
+supply=c(8,6,14,16,10,20,24)
+```
+
+
+
+### Calculating correlation coefficient
+
+```{r}
+resp1=cor.test(price,supply,method='pearson')
+resp1
+```
+
+### Direct calculation
+
+Formula is: $$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+```{r}
+#direct calculation
+rho=(sum(((price-mean(price))*(supply-mean(supply)))))/(sqrt(sum((price-mean(price))^2)*(sum((supply-mean(supply))^2))))
+rho
+```
+
+### Plotting the variables
+```{r}
+my_data=data.frame(price=price,supply=supply)
+head(my_data)
+```
+
+
+
+```{r Scattercor, fig.cap='Scatter plot with smooth fit curve', out.width='80%', fig.asp=.75, fig.align='center',warning=FALSE}
+library(ggpubr)
+ggscatter(my_data, x = "price", y = "supply", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Price", ylab = "Supply")
+```
+
+
+
+## Results & discussions
+
+Correlation coefficient of given bivariate data is calculated using built-in function in `stats` package. The result is verified using direct calculation.
+
+Since the Pearson coefficient is `r resp1$estimate`. Also p-value is `r resp1$p.value ` <0.05. So the null hypothesis is accepted. So it is statistically reasonable to conclude that there is a significant positive correlation between the price and supply based on the sample.
+
+
+# Experiment 11: Correlation analysis- Karl-Pearson Coefficient of Correlation
+
+
+## Aim
+
+1. To find the correlation coefficient of the given bivariate data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default)is used. 
+
+**Pearson correlation (r)**, which measures a linear dependence between two variables (x and y). It’s also known as a parametric correlation test because it depends to the distribution of the data. It can be used only when x and y are from normal distribution. The plot of $y = f(x)$ is named the linear regression curve. The Pearson correlation formula is:
+$$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+where $m_x$ and $m_y$ are means of the distributions x and y respectively.
+
+Correlation coefficient can be computed using the functions `cor()` or `cor.test()`:
+
+**Syntax:**
+
+> `cor(x, y, method = c("pearson", "kendall", "spearman"))`
+ `cor.test(x, y, method=c("pearson", "kendall", "spearman"))`
+>Note: If the data contain missing values, use the following R code to handle missing values by case-wise deletion.
+`cor(x, y,  method = "pearson", use = "complete.obs")`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required correlation model
+
+* Step 2: Calculate the correlation coefficient
+
+* Step 3: Verify the result using direct calculation
+
+* Step 4: Interpret the result
+
+
+>*Case:*  From the following data compute correlation between height of father and height of daughters by Karl Pearson's coefficient of correlation.
+
+
+$\begin{array}{|l|cccccccc|}\hline
+\text{Height of Father(Cms)}& 65& 66& 67& 67& 68& 69& 71& 73\\
+\text{Height of Daughter(Cms)}& 67& 68& 64& 69& 72& 70& 69& 73\\\hline
+\end{array}$
+
+
+## R code
+
+```{r}
+# loading data
+height_F=c(65,66,67,67,68,69,71,73)
+height_D=c(67,68,64,69,72,70,69,73)
+```
+
+
+
+### Calculating correlation coefficient
+
+```{r}
+resp2=cor.test(height_F,height_D,method='pearson')
+resp2
+```
+
+### Direct calculation
+
+Formula is: $$r = \frac{\sum{(x-m_x)(y-m_y)}}{\sqrt{\sum{(x-m_x)^2}\sum{(y-m_y)^2}}}$$ 
+
+```{r}
+#direct calculation
+rho=(sum(((height_F-mean(height_F))*(height_D-mean(height_D)))))/(sqrt(sum((height_F-mean(height_F))^2)*(sum((height_D-mean(height_D))^2))))
+rho
+```
+
+### Plotting the variables
+```{r}
+my_data=data.frame(height_F=height_F,height_D=height_D)
+head(my_data)
+```
+
+
+
+```{r Scattercor1, fig.cap='Scatter plot with smooth fit curve', out.width='80%', fig.asp=.75, fig.align='center',warning=FALSE}
+library(ggpubr)
+ggscatter(my_data, x = "height_F", y = "height_D", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Height of Father", ylab = "Height of Daugther")
+```
+
+
+
+## Results & discussions
+
+Correlation coefficient of given bivariate data is calculated using built-in function in `stats` package. The result is verified using direct calculation.
+
+The Pearson coefficient is `r resp2$estimate`. Also p-value is `r resp2$p.value ` >0.05. So the null hypothesis is rejected. So it is statistically reasonable to conclude that there is no significant positive correlation between the ages of the samples.
+
+# Experiment 12: Correlation analysis- Spearman Rank Correlation Coefficient
+
+
+## Aim
+
+1. To find the Spearman rank correlation coefficient of the given bivariate data
+
+## Packages used and syntax of R methods
+
+Functions from `stat` package (which is loaded by default) is used. 
+
+**Pearson correlation (r)**, which measures a linear dependence between two variables (x and y). It’s also known as a parametric correlation test because it depends to the distribution of the data. It can be used only when x and y are from normal distribution. The plot of $y = f(x)$ is named the linear regression curve. The Spearman correlation method computes the correlation between the rank of x and the rank of y variables.
+
+$$ rho = \frac{\sum(x' - m_{x'})(y'_i - m_{y'})}{\sqrt{\sum(x' - m_{x'})^2 \sum(y' - m_{y'})^2}}$$
+
+
+where $x'=rank(x)$ and $y'=rank(y)$.
+
+Correlation coefficient can be computed using the functions `cor()` or `cor.test()`:
+
+**Syntax:**
+
+> `cor(x, y, method = c("pearson", "kendall", "spearman"))`
+ `cor.test(x, y, method=c("pearson", "kendall", "spearman"))`
+>Note: If the data contain missing values, use the following R code to handle missing values by case-wise deletion.
+`cor(x, y,  method = "pearson", use = "complete.obs")`
+
+## Algorithm
+
+* Step 1: Assign the inputs for required correlation model
+
+* Step 2: Calculate the correlation coefficient
+
+* Step 3: Interpret the result
+
+
+
+>*Case:*  The scores for nine students in history and algebra are as follows:
+
+
+$\begin{array}{|l|ccccccccc|}\hline
+\text{History}:&35& 23& 47& 17& 10& 43& 9& 6&28\\\hline
+\text{Algebra}:&30& 33&45&23&8&49&12&4&31\\\hline
+\end{array}$
+
+Compute the Spearman rank correlation.
+
+
+## R code
+
+```{r}
+# loading data
+History=c(35,23,47,17,10,43,9,6,28)
+Algebra=c(30,33,45,23,8,49,12,4,31)
+```
+
+
+
+### Calculating correlation coefficient
+
+```{r}
+ress3=cor.test(History,Algebra,method='spearman')
+ress3
+```
+
+
+### Plotting the variables
+```{r}
+my_data=data.frame(History=History,Algebra=Algebra)
+head(my_data)
+```
+
+
+
+```{r Scattercor2, fig.cap='Scatter plot with smooth fit curve', out.width='80%', fig.asp=.75, fig.align='center',warning=FALSE}
+library(ggpubr)
+ggscatter(my_data, x = "History", y = "Algebra", 
+          add = "reg.line", conf.int = TRUE, 
+          cor.coef = TRUE, cor.method = "spearman",
+          xlab = "Marks in History", ylab = "Marks in Algebra")
+```
+
+
+
+## Results & discussions
+
+Correlation coefficient of given bivariate data is calculated using built-in function in `stats` package. 
+
+The Spearman rank correlation coefficient is `r ress3$estimate`. Also p-value is `r ress3$p.value ` >0.05. So the null hypothesis is rejected. So it is statistically reasonable to conclude that there is  significant positive correlation between the marks of the samples.
+
+# Experiment 13: Ordinary Linear Regression using R
+
+## Aim
+
+1. To fit a linear regression to the given data
+
+## Packages used and syntax of R methods
+
+Functions from `stats` package (which is loaded by default). 
+
+**Regression assumptions**
+
+Linear regression makes several assumptions about the data, such as :
+
+1. Linearity of the data. The relationship between the predictor (x) and the outcome (y) is assumed to be linear.
+
+2. Normality of residuals. The residual errors are assumed to be normally distributed.
+
+3. Homogeneity of residuals variance. The residuals are assumed to have a constant variance (homoscedasticity)
+
+4. Independence of residuals error terms.
+
+One should check whether or not these assumptions hold true. Potential problems include:
+
+1. Non-linearity of the outcome - predictor relationships
+
+2. Heteroscedasticity: Non-constant variance of error terms.
+
+3. Presence of influential values in the data that can be:
+
+4. Outliers: extreme values in the outcome (y) variable
+
+5. High-leverage points: extreme values in the predictors (x) variable
+
+6. All these assumptions and potential problems can be checked by producing some diagnostic plots visualizing the residual errors.
+
+When  build a regression model, one need to assess the performance of the predictive model. In other words, we need to evaluate how well the model is in predicting the outcome of a new test data that have not been used to build the model.
+
+Two important metrics are commonly used to assess the performance of the predictive regression model:
+
+**Root Mean Squared Error**, which measures the model prediction error. It corresponds to the average difference between the observed known values of the outcome and the predicted value by the model. RMSE is computed as $RMSE = mean((observeds - predicteds)^2) %>% sqrt()$
+
+We read this as “y is modeled as beta1 ($b_1$) times x, plus a constant beta0 ($b_0$), plus an error term e.”
+
+When we have multiple predictor variables, the equation can be written as  $y = b_0 + b_1*x + e$, where: * $b_0$ is the intercept, $b_1, b_2,\ldots, b_n$ are the regression weights or coefficients associated with the predictors  $x_1, x_2, \ldots, x_n$.
+* $e$  is the error term (also known as the residual errors), the part of $y$ that can be explained by the regression model.
+
+
+## Algorithm
+
+* Step 1: Assign the inputs for required regression model
+
+* Step 2: Create the regression model using linear model- `lm()` function in R
+
+* Step 3: Report the summary coefficients
+
+* Step 4: Interpret the model summary
+
+
+>*Case:* Build a simple linear model to predict sales units based on the advertising budget spent on youtube. The sales data with corresponding expenditure on advertisment in Youtube is shown below:
+$\begin{array}{|l|ccccccc|}\hline \text{Sales(Y)}:& 2&4&6&9&12&34&45\\\hline \text{Add expense(Youtube)}:& 1&2&4&7&9&11&15\\\hline \end{array}$
+
+Fit a OLS model and predict the sales for an add expence ($\$$) $1000,2000,3500$. Also interpret the the linear model with suitable fit measures.
+
+## R code
+
+```{r}
+# create input parameters
+marketing=data.frame(sales=c(2,4,6,9,12,34,45),youtube=c(1,2,4,7,9,11,15))
+```
+
+### Plotting the data as a scatter diagram
+
+```{r}
+library(ggplot2)
+ggplot(marketing, aes(x = youtube, y = sales)) +
+  geom_point() +
+  stat_smooth()
+```
+
+### Checking Association
+
+```{r}
+cor.test(marketing$sales,marketing$youtube)
+```
+
+
+### Create the OLS model
+
+```{r}
+#fit a linear model
+model <- lm(sales ~ youtube, data = marketing)
+```
+
+### Model summary
+
+```{r}
+summary(model)$coef
+```
+### Prediction using fitted models
+
+```{r, message=FALSE}
+library(dplyr)
+newdata <- data.frame(youtube = c(1000,  2000, 3500))
+model %>% predict(newdata)
+```
+
+
+## Results & discussions
+
+From the given data, an OLR model is created using R function `lm()`. In our example, the fitted linear model is $$Sales=-5.363636+3.051948(Youtube)$$ it can be seen that p-value of the F-statistic is 0.002, which is highly significant. This means that, at least, one of the predictor variables is significantly related to the outcome variable. So it is statistically reasonable to conclude that advertisement in Youtube significantly impact the sales. Finally the predicted returns are $3046.584  6098.532 10676.455$ for respective investment $1000,2000$ and $3500$ respectively.
+
+# Experiment 14: Construct a scatter plot to investigate the relationship between two variables.
+
+## Aim
+
+1. To investigate relationship between two given variables.
+
+## Packages used and syntax of R methods
+
+Functions from `stats` package (which is loaded by default). For plottting the scatter points, the `geom_point()` function from `ggplot2` package and `cor.test()` function from `stats` package are used.
+ 
+
+## Algorithm
+
+* Step 1: Assign the inputs for required comparison
+
+* Step 2: Create scatter plot using- `plot()` function in R
+
+* Step 3: Report the observations
+
+* Step 4: Confirm the observation using correlation analysis.
+
+
+>*Case:* Identify the relationship between sales units based on the advertising budget spent on youtube. The sales data with corresponding expenditure on advertisment in Youtube is shown below:
+
+$\begin{array}{|l|ccccccc|}\hline \text{Sales(Y)}:& 2&4&6&9&12&34&45\\\hline \text{Add expense(Youtube)}:& 1&2&4&7&9&11&15\\\hline \end{array}$
+
+
+## R code
+
+```{r}
+# create input parameters
+marketing=data.frame(sales=c(2,4,6,9,12,34,45),youtube=c(1,2,4,7,9,11,15))
+```
+
+### Plotting the data as a scatter diagram
+
+```{r}
+library(ggplot2)
+ggplot(marketing, aes(x = youtube, y = sales)) +
+  geom_point() +
+  stat_smooth()
+```
+
+### Checking Association
+
+```{r}
+cor.test(marketing$sales,marketing$youtube)
+```
+
+
+## Results & discussions
+
+The given variables are plotted using `ggplot2` package. From the plot it is clear that there is a linear relationship between the variables. The correlation coefficient is 0.9267856. So the linear association is highly significant at 5% significance level.
+
+# Experiment 15: Compute confidence intervals for the mean when the standard deviation is known
+
+## Aim
+
+1. To Compute confidence intervals for the mean of a given dataset.
+
+## Packages used and syntax of R methods
+
+Functions from `stats` package (which is loaded by default) are used.
+ 
+
+## Algorithm
+
+* Step 1: Assign the inputs 
+
+* Step 2: Find the mean , variance and SE
+
+* Step 3: Calculate a 95% confidence interval for mean using the formula $\bar{X}\pm 1.96 SE$. Here $SE=\frac{SD}{\sqrt{n}}$
+
+* Step 4: Return the confidence intervals (LCL and UCL)
+
+
+>*Case:* Calculate a 95% confidence interval for mean if $\bar{X}=12,SD=3, n=30$
+
+
+## R code
+
+```{r}
+# create input parameters
+xbar <- 12
+stddev <- 3
+n <- 30
+```
+
+### Calculating 95% confidence interval for the mean
+
+```{r}
+SE=stddev/sqrt(n)
+error <- qnorm(0.975)*SE
+lower_bound <- xbar - error
+upper_bound <- xbar + error
+
+```
+
+### Display the LCL and UCL
+
+```{r}
+lower_bound
+```
+
+```{r}
+upper_bound
+```
+
+## Results & discussions
+
+The 95% confidence interval for mean is calculated as $(`r lower_bound`,`r upper_bound`)$. 
+
+
 \hrule
+
 
 # References {.unnumbered}
